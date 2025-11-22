@@ -16,6 +16,7 @@ window.addEventListener('scroll', () => {
 // Mobile menu toggle
 mobileMenuBtn.addEventListener('click', () => {
     navMenu.classList.toggle('active');
+    document.body.classList.toggle('menu-open');
     const icon = mobileMenuBtn.querySelector('i');
     icon.classList.toggle('fa-bars');
     icon.classList.toggle('fa-times');
@@ -25,10 +26,24 @@ mobileMenuBtn.addEventListener('click', () => {
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
         const icon = mobileMenuBtn.querySelector('i');
         icon.classList.remove('fa-times');
         icon.classList.add('fa-bars');
     });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (navMenu.classList.contains('active') && 
+        !navMenu.contains(e.target) && 
+        !mobileMenuBtn.contains(e.target)) {
+        navMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        const icon = mobileMenuBtn.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
 });
 
 // Active nav link on scroll
@@ -55,58 +70,68 @@ function setActiveNavLink() {
 
 window.addEventListener('scroll', setActiveNavLink);
 
-// ===== SLIDER AUTOMÁTICO =====
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
-const sliderContainer = document.getElementById('sliderContainer');
-const sliderIndicators = document.getElementById('sliderIndicators');
-
-// Create indicators
-for (let i = 0; i < totalSlides; i++) {
-    const dot = document.createElement('button');
-    dot.className = 'slider-dot';
-    if (i === 0) dot.classList.add('active');
-    dot.setAttribute('data-slide', i);
-    dot.setAttribute('aria-label', `Ir para slide ${i + 1}`);
-    dot.addEventListener('click', () => goToSlide(i));
-    sliderIndicators.appendChild(dot);
-}
-
-function goToSlide(index) {
-    currentSlide = index;
-    sliderContainer.style.transform = `translateX(-${currentSlide * 20}%)`;
-    
-    // Update indicators
-    document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-    });
-}
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    goToSlide(currentSlide);
-}
-
-// Auto-slide every 5 seconds
-setInterval(nextSlide, 10000);
 
 // ===== INTERSECTION OBSERVER PARA ANIMAÇÕES =====
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -100px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+            // Delay escalonado para elementos múltiplos
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, index * 100);
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
 document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
+});
+
+// ===== PARALLAX EFFECT =====
+const parallaxElements = document.querySelectorAll('.parallax-element');
+if (parallaxElements.length > 0) {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        parallaxElements.forEach(element => {
+            const rate = scrolled * 0.5;
+            element.style.transform = `translateY(${rate}px)`;
+        });
+    });
+}
+
+// ===== SMOOTH SCROLL ENHANCEMENT =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            // Adiciona animação suave com easing
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            
+            // Fecha menu mobile se estiver aberto
+            if (navMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        }
+    });
 });
 
 // ===== GALERIA E LIGHTBOX =====
@@ -173,23 +198,44 @@ filterButtons.forEach(button => {
     button.addEventListener('click', () => {
         const filter = button.getAttribute('data-filter');
         
+        // Animação do botão clicado
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            button.style.transform = 'scale(1)';
+        }, 150);
+        
         filterButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
+        
+        // Animação escalonada dos itens
+        let visibleItems = [];
+        opportunityItems.forEach((item, index) => {
+            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                visibleItems.push({ item, index });
+            }
+        });
         
         opportunityItems.forEach(item => {
             if (filter === 'all' || item.getAttribute('data-category') === filter) {
                 item.style.display = 'block';
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, 10);
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px) scale(0.9)';
             } else {
                 item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
+                item.style.transform = 'translateY(20px) scale(0.95)';
                 setTimeout(() => {
                     item.style.display = 'none';
                 }, 300);
             }
+        });
+        
+        // Anima itens visíveis com delay escalonado
+        visibleItems.forEach(({ item, index }) => {
+            setTimeout(() => {
+                item.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0) scale(1)';
+            }, index * 100);
         });
     });
 });
@@ -198,35 +244,66 @@ filterButtons.forEach(button => {
 const consultoriaForm = document.getElementById('consultoriaForm');
 const filieForm = document.getElementById('filie-form');
 
+// Animação de foco nos inputs
+document.querySelectorAll('input, textarea, select').forEach(input => {
+    input.addEventListener('focus', function() {
+        this.parentElement.style.transform = 'scale(1.02)';
+        this.parentElement.style.transition = 'transform 0.3s ease';
+    });
+    
+    input.addEventListener('blur', function() {
+        this.parentElement.style.transform = 'scale(1)';
+    });
+});
+
 consultoriaForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Obrigado pelo seu interesse! Entraremos em contato em breve.');
-    consultoriaForm.reset();
+    const submitBtn = consultoriaForm.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.style.opacity = '0.7';
+    submitBtn.disabled = true;
+    
+    setTimeout(() => {
+        submitBtn.textContent = '✓ Enviado!';
+        submitBtn.style.background = '#28a745';
+        alert('Obrigado pelo seu interesse! Entraremos em contato em breve.');
+        
+        setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = '';
+            submitBtn.style.opacity = '1';
+            submitBtn.disabled = false;
+            consultoriaForm.reset();
+        }, 2000);
+    }, 1000);
 });
 
 filieForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Sua solicitação de filiação foi enviada com sucesso! Entraremos em contato em breve.');
-    filieForm.reset();
+    const submitBtn = filieForm.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Enviando...';
+    submitBtn.style.opacity = '0.7';
+    submitBtn.disabled = true;
+    
+    setTimeout(() => {
+        submitBtn.textContent = '✓ Enviado!';
+        submitBtn.style.background = '#28a745';
+        alert('Sua solicitação de filiação foi enviada com sucesso! Entraremos em contato em breve.');
+        
+        setTimeout(() => {
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = '';
+            submitBtn.style.opacity = '1';
+            submitBtn.disabled = false;
+            filieForm.reset();
+        }, 2000);
+    }, 1000);
 });
 
-// ===== SCROLL SUAVE =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const headerOffset = 80;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
 
 // ===== PERFORMANCE: LAZY LOADING =====
 if ('IntersectionObserver' in window) {
