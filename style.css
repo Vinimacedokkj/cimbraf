@@ -118,6 +118,80 @@ nav {
     }
 }
 
+/* ===== OTIMIZAÇÃO PARA TELAS MUITO PEQUENAS (320px - 480px) ===== */
+@media (max-width: 480px) {
+    header {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    nav {
+        max-width: 100%;
+        padding: 0.6rem 1rem;
+        gap: 0.5rem;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+        gap: 0.3rem;
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .logo > img.logo-img {
+        height: 45px;
+        max-height: 45px;
+        width: auto;
+    }
+    
+    .mobile-menu-btn {
+        display: flex;
+        min-width: 40px;
+        min-height: 40px;
+        padding: 0.4rem;
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0.5rem;
+    }
+    
+    .mobile-menu-btn i {
+        font-size: 1.2rem;
+        line-height: 1;
+        display: block;
+    }
+}
+
+/* ===== OTIMIZAÇÃO ESPECÍFICA PARA TELAS EXTRA PEQUENAS (320px - 375px) ===== */
+@media (max-width: 375px) {
+    nav {
+        padding: 0.5rem 0.8rem;
+        gap: 0.4rem;
+    }
+    
+    .logo {
+        font-size: 1rem;
+        gap: 0.25rem;
+    }
+    
+    .logo > img.logo-img {
+        height: 40px;
+        max-height: 40px;
+    }
+    
+    .mobile-menu-btn {
+        min-width: 36px;
+        min-height: 36px;
+        padding: 0.3rem;
+        font-size: 1.1rem;
+        margin-left: 0.3rem;
+    }
+    
+    .mobile-menu-btn i {
+        font-size: 1.1rem;
+    }
+}
+
 .logo:hover > img.logo-img {
     transform: scale(1.05) rotate(2deg);
 }
@@ -1920,6 +1994,12 @@ section {
     .nav-menu {
         max-width: 100%;
         top: 0;
+        padding: 1.5rem 1.5rem;
+    }
+    
+    .nav-menu a {
+        font-size: 0.95rem;
+        padding: 0.9rem 0;
     }
     
     nav {
@@ -1937,7 +2017,82 @@ section {
         min-width: 40px;
         min-height: 40px;
     }
+}
+
+/* ===== AJUSTES ADICIONAIS PARA TELAS PEQUENAS NO MENU MOBILE ===== */
+@media (max-width: 480px) {
+    .nav-menu {
+        padding: 1.2rem 1rem;
+        max-width: 100%;
+    }
     
+    .nav-menu a {
+        font-size: 0.9rem;
+        padding: 0.8rem 0;
+    }
+}
+
+@media (max-width: 375px) {
+    .nav-menu {
+        padding: 1rem 0.8rem;
+    }
+    
+    .nav-menu a {
+        font-size: 0.85rem;
+        padding: 0.7rem 0;
+    }
+    
+    #inicio {
+        height: 70vh;
+        min-height: 400px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-button {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .hero-content {
+        padding: 1.5rem;
+    }
+    
+    section {
+        padding: 3rem 1rem;
+    }
+    
+    .mvv-grid,
+    .directors-grid,
+    .projects-grid,
+    .services-grid,
+    .courses-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .filie-form {
+        padding: 2rem 1.5rem;
+    }
+    
+    .contact-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== CONTEÚDO GERAL PARA MOBILE (768px) ===== */
+@media (max-width: 768px) {
     #inicio {
         height: 70vh;
         min-height: 400px;
