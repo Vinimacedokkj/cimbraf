@@ -135,7 +135,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===== GALERIA E LIGHTBOX =====
-const galleryItems = document.querySelectorAll('.gallery-item');
+const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+const galleryImageElements = galleryItems.map(item => item.querySelector('img'));
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const lightboxClose = document.getElementById('lightboxClose');
@@ -151,9 +152,12 @@ galleryItems.forEach((item, index) => {
 });
 
 function openLightbox(index) {
-    // Por enquanto, mostra placeholder. Substituir por imagens reais
-    lightboxImage.src = `https://via.placeholder.com/800x600/103E28/A06A1A?text=Imagem+${index + 1}`;
-    lightboxImage.alt = `Imagem ${index + 1}`;
+    const selectedImage = galleryImageElements[index];
+    if (!selectedImage) {
+        return;
+    }
+    lightboxImage.src = selectedImage.src;
+    lightboxImage.alt = selectedImage.alt || `Imagem ${index + 1}`;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
