@@ -1159,7 +1159,13 @@
                     Nossa equipe entrará em contato o mais breve possível.
                 </p>
                 
-                <form class="contato-form" id="contato-form">
+                <form name="contato" method="POST" netlify netlify-honeypot="bot-field" data-netlify="true" class="contato-form" id="contato-form">
+                    <!-- Campo hidden para proteção contra spam do Netlify -->
+                    <input type="hidden" name="form-name" value="contato" />
+                    <p style="display: none;">
+                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                    </p>
+                    
                     <h3 style="color: var(--verde-institucional); margin-bottom: 1.5rem; text-align: center;">
                         Formulário de Solicitação
                     </h3>
