@@ -4,6 +4,47 @@ const navLinks = document.querySelectorAll('.nav-link');
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const navMenu = document.getElementById('navMenu');
 
+// ===== SELETOR DE IDIOMA =====
+const languageSelector = document.getElementById('languageSelector');
+const languageBtn = document.getElementById('languageBtn');
+const languageDropdown = document.getElementById('languageDropdown');
+const languageOptions = document.querySelectorAll('.language-option');
+
+// Toggle do dropdown de idioma
+if (languageBtn && languageDropdown) {
+    languageBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        languageSelector.classList.toggle('active');
+    });
+    
+    // Fechar dropdown ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (!languageSelector.contains(e.target)) {
+            languageSelector.classList.remove('active');
+        }
+    });
+    
+    // Fechar dropdown ao selecionar um idioma (mesmo que não seja funcional)
+    languageOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Remove active de todos
+            languageOptions.forEach(opt => opt.classList.remove('active'));
+            // Adiciona active no selecionado
+            option.classList.add('active');
+            // Atualiza o texto do botão
+            const langText = option.textContent.trim();
+            const langCode = option.getAttribute('data-lang').toUpperCase();
+            const languageText = languageBtn.querySelector('.language-text');
+            if (languageText) {
+                languageText.textContent = langCode;
+            }
+            // Fecha o dropdown
+            languageSelector.classList.remove('active');
+        });
+    });
+}
+
 // Header scroll effect
 window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
@@ -37,7 +78,8 @@ navLinks.forEach(link => {
 document.addEventListener('click', (e) => {
     if (navMenu.classList.contains('active') && 
         !navMenu.contains(e.target) && 
-        !mobileMenuBtn.contains(e.target)) {
+        !mobileMenuBtn.contains(e.target) &&
+        !languageSelector.contains(e.target)) {
         navMenu.classList.remove('active');
         document.body.classList.remove('menu-open');
         const icon = mobileMenuBtn.querySelector('i');

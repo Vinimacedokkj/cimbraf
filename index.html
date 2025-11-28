@@ -45,9 +45,24 @@
                 <li><a href="#beneficios" class="nav-link">Benefícios</a></li>
                 <li><a href="#contato" class="nav-link">Contato</a></li>
             </ul>
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu mobile">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div class="header-actions">
+                <div class="language-selector" id="languageSelector">
+                    <button class="language-btn" id="languageBtn" aria-label="Selecionar idioma">
+                        <i class="fas fa-globe"></i>
+                        <span class="language-text">PT</span>
+                        <i class="fas fa-chevron-down language-arrow"></i>
+                    </button>
+                    <ul class="language-dropdown" id="languageDropdown">
+                        <li><a href="#" class="language-option active" data-lang="pt">🇧🇷 Português</a></li>
+                        <li><a href="#" class="language-option" data-lang="en">🇺🇸 English</a></li>
+                        <li><a href="#" class="language-option" data-lang="fr">🇫🇷 Français</a></li>
+                        <li><a href="#" class="language-option" data-lang="es">🇪🇸 Español</a></li>
+                    </ul>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu mobile">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
