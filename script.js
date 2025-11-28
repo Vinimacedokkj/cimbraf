@@ -321,14 +321,10 @@ if (contatoForm) {
                     submitBtn.disabled = false;
                 }, 3000);
             }, 1500);
-        } else {
-            // No Netlify, deixa o formulário ser enviado normalmente
-            // O Netlify processará automaticamente
-            // Após o envio, pode redirecionar para success.html se configurado
-            setTimeout(function() {
-                window.location.href = '/success.html';
-            }, 2000);
         }
+        // No Netlify, deixa o formulário ser enviado normalmente
+        // O Netlify processará automaticamente e redirecionará para /success.html
+        // conforme configurado no atributo action do formulário
     });
 }
 
