@@ -43,7 +43,7 @@
                 <li><a href="#qualificacao" class="nav-link">Cursos</a></li>
                 <li><a href="#oportunidades" class="nav-link">Oportunidades</a></li>
                 <li><a href="#beneficios" class="nav-link">Benefícios</a></li>
-                <li><a href="#filie-se" class="nav-link">Filie-se</a></li>
+                <li><a href="#contato" class="nav-link">Contato</a></li>
             </ul>
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu mobile">
                 <i class="fas fa-bars"></i>
@@ -613,7 +613,7 @@
                             <li>Impacto Social e Responsabilidade Econômica</li>
                         </ol>
                     </div>
-                    <a href="#filie-se" class="course-btn">Inscreva-se</a>
+                    <a href="#contato" class="course-btn">Solicite Informações</a>
                 </div>
                 
                 <div class="course-card fade-in">
@@ -644,7 +644,7 @@
                             <li>Construção de Carteira Personalizada</li>
                         </ol>
                     </div>
-                    <a href="#filie-se" class="course-btn">Inscreva-se</a>
+                    <a href="#contato" class="course-btn">Solicite Informações</a>
                 </div>
                 
                 <div class="course-card fade-in">
@@ -677,7 +677,7 @@
                             <li>Negócios Digitais e Ecossistemas de Pagamento</li>
                         </ol>
                     </div>
-                    <a href="#filie-se" class="course-btn">Inscreva-se</a>
+                    <a href="#contato" class="course-btn">Solicite Informações</a>
                 </div>
                 
                 <div class="course-card fade-in">
@@ -708,7 +708,7 @@
                             <li>Captação de Investimento e Pitch Profissional</li>
                         </ol>
                     </div>
-                    <a href="#filie-se" class="course-btn">Inscreva-se</a>
+                    <a href="#contato" class="course-btn">Solicite Informações</a>
                 </div>
 
                 <div class="course-card fade-in">
@@ -738,7 +738,7 @@
                             <li>Acordos Comerciais e Regulamentações</li>
                         </ul>
                     </div>
-                    <a href="#filie-se" class="course-btn">Inscreva-se</a>
+                    <a href="#contato" class="course-btn">Solicite Informações</a>
                 </div>
             </div>
         </div>
@@ -1147,47 +1147,76 @@
         </div>
     </section>
 
-    <!-- SEÇÃO 11: CLIQUE AQUI E FILIE-SE -->
-    <section id="filie-se" class="fade-in">
+    <!-- SEÇÃO 11: CONTATO E SOLICITAÇÕES -->
+    <section id="contato" class="fade-in">
         <div class="container">
-            <div class="filie-content">
+            <div class="contato-content">
                 <div class="section-title">
-                    <h2>Clique Aqui e Filie-se à CIMBRAF</h2>
+                    <h2>Entre em Contato com a CIMBRAF</h2>
                     <div class="divider"></div>
                 </div>
                 
                 <p>
-                    Junte-se a uma comunidade de líderes comprometidos com o desenvolvimento Brasil-África. 
-                    Faça parte da transformação e crie conexões que impulsionam negócios e oportunidades.
+                    Estamos prontos para ajudar você! Preencha o formulário abaixo para solicitar informações, 
+                    fazer uma pergunta, solicitar filiação, consultoria, ou qualquer outro tipo de atendimento. 
+                    Nossa equipe entrará em contato o mais breve possível.
                 </p>
                 
-                <a href="#filie-form" class="filie-cta">
-                    <i class="fas fa-handshake"></i> Filie-se Agora
-                </a>
-                
-                <form class="filie-form" id="filie-form">
+                <form class="contato-form" id="contato-form">
                     <h3 style="color: var(--verde-institucional); margin-bottom: 1.5rem; text-align: center;">
-                        Formulário de Pré-Cadastro
+                        Formulário de Solicitação
                     </h3>
+                    
                     <div class="form-group">
-                        <label for="filie-nome">Nome Completo *</label>
-                        <input type="text" id="filie-nome" name="nome" required>
+                        <label for="solicitacao-tipo">Tipo de Solicitação *</label>
+                        <select id="solicitacao-tipo" name="tipo_solicitacao" required>
+                            <option value="">Selecione o tipo de solicitação</option>
+                            <option value="contato">Contato / Dúvida Geral</option>
+                            <option value="filiação">Solicitação de Filiação</option>
+                            <option value="consultoria">Consultoria de Negócios</option>
+                            <option value="oportunidades">Interesse em Oportunidades de Negócios</option>
+                            <option value="cursos">Informações sobre Cursos e Qualificação</option>
+                            <option value="parcerias">Proposta de Parceria</option>
+                            <option value="projetos">Interesse em Projetos</option>
+                            <option value="outros">Outros</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="filie-email">E-mail *</label>
-                        <input type="email" id="filie-email" name="email" required>
+                    
+                    <div class="form-group" id="curso-select-group" style="display: none;">
+                        <label for="curso-selecionado">Selecione o Curso de Interesse *</label>
+                        <select id="curso-selecionado" name="curso_selecionado">
+                            <option value="">Selecione um curso</option>
+                            <option value="gestao-financeira">Gestão Financeira e Empreendedorismo de Impacto (40 horas)</option>
+                            <option value="estrategias-investimento">Estratégias Inteligentes de Investimento para Mercados Emergentes (36 horas)</option>
+                            <option value="financas-digitais">Finanças Digitais e Meios de Pagamento Modernos (32 horas)</option>
+                            <option value="empreendedorismo-startups">Empreendedorismo Sustentável e Criação de Startups (44 horas)</option>
+                            <option value="comercio-internacional">Comércio Internacional, Transações e Operações Globais (48 horas)</option>
+                        </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="filie-telefone">Telefone *</label>
-                        <input type="tel" id="filie-telefone" name="telefone" required>
+                        <label for="contato-nome">Nome Completo *</label>
+                        <input type="text" id="contato-nome" name="nome" required>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="filie-empresa">Empresa/Instituição</label>
-                        <input type="text" id="filie-empresa" name="empresa">
+                        <label for="contato-email">E-mail *</label>
+                        <input type="email" id="contato-email" name="email" required>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="filie-pais">País *</label>
-                        <select id="filie-pais" name="pais" required style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px;">
+                        <label for="contato-telefone">Telefone/WhatsApp *</label>
+                        <input type="tel" id="contato-telefone" name="telefone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contato-empresa">Empresa/Instituição</label>
+                        <input type="text" id="contato-empresa" name="empresa" placeholder="Opcional">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contato-pais">País *</label>
+                        <select id="contato-pais" name="pais" required>
                             <option value="">Selecione um país</option>
                             <option value="brasil">Brasil</option>
                             <option value="africa-sul">África do Sul</option>
@@ -1195,14 +1224,20 @@
                             <option value="mocambique">Moçambique</option>
                             <option value="gana">Gana</option>
                             <option value="nigeria">Nigéria</option>
+                            <option value="quenia">Quênia</option>
+                            <option value="ruanda">Ruanda</option>
                             <option value="outro">Outro</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="filie-mensagem">Mensagem</label>
-                        <textarea id="filie-mensagem" name="mensagem" rows="4"></textarea>
+                        <label for="contato-mensagem">Descreva sua solicitação ou mensagem *</label>
+                        <textarea id="contato-mensagem" name="mensagem" rows="5" required placeholder="Por favor, forneça mais detalhes sobre sua solicitação..."></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Enviar Solicitação de Filiação</button>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Enviar Solicitação
+                    </button>
                 </form>
                 
                 <div class="contact-info">
