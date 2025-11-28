@@ -72,18 +72,19 @@ window.addEventListener('scroll', setActiveNavLink);
 
 
 // ===== INTERSECTION OBSERVER PARA ANIMAÇÕES =====
+// Configuração para detectar elementos mais cedo (quando estão chegando, não quando já estão no topo)
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.01, // Detecta assim que qualquer parte do elemento aparecer
+    rootMargin: '0px 0px 100px 0px' // Expande a área de detecção para baixo em 200px (detecta antes de chegar)
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            // Delay escalonado para elementos múltiplos
+            // Delay escalonado reduzido para elementos múltiplos
             setTimeout(() => {
                 entry.target.classList.add('visible');
-            }, index * 100);
+            }, index * 50);
             observer.unobserve(entry.target);
         }
     });
