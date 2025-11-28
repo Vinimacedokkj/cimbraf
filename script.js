@@ -74,7 +74,7 @@ window.addEventListener('scroll', setActiveNavLink);
 // ===== INTERSECTION OBSERVER PARA ANIMAÇÕES =====
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -89,6 +89,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
+// Observar todos os elementos com fade-in (incluindo a seção de oportunidades)
 document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
 });
@@ -135,7 +136,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===== GALERIA E LIGHTBOX =====
-const galleryItems = document.querySelectorAll('.gallery-item');
+const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+const galleryImageElements = galleryItems.map(item => item.querySelector('img'));
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const lightboxClose = document.getElementById('lightboxClose');
@@ -151,9 +153,12 @@ galleryItems.forEach((item, index) => {
 });
 
 function openLightbox(index) {
-    // Por enquanto, mostra placeholder. Substituir por imagens reais
-    lightboxImage.src = `https://via.placeholder.com/800x600/103E28/A06A1A?text=Imagem+${index + 1}`;
-    lightboxImage.alt = `Imagem ${index + 1}`;
+    const selectedImage = galleryImageElements[index];
+    if (!selectedImage) {
+        return;
+    }
+    lightboxImage.src = selectedImage.src;
+    lightboxImage.alt = selectedImage.alt || `Imagem ${index + 1}`;
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
@@ -219,30 +224,61 @@ filterButtons.forEach(button => {
             if (filter === 'all' || item.getAttribute('data-category') === filter) {
                 item.style.display = 'block';
                 item.style.opacity = '0';
-                item.style.transform = 'translateY(30px) scale(0.9)';
+                item.style.transform = 'translateY(20px) scale(0.98)';
             } else {
                 item.style.opacity = '0';
-                item.style.transform = 'translateY(20px) scale(0.95)';
+                item.style.transform = 'translateY(10px) scale(0.98)';
                 setTimeout(() => {
                     item.style.display = 'none';
-                }, 300);
+                }, 150);
             }
         });
         
-        // Anima itens visíveis com delay escalonado
+        // Anima itens visíveis com delay escalonado reduzido
         visibleItems.forEach(({ item, index }) => {
             setTimeout(() => {
-                item.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                item.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
                 item.style.opacity = '1';
                 item.style.transform = 'translateY(0) scale(1)';
-            }, index * 100);
+            }, index * 30);
         });
     });
 });
 
+// ===== CONTROLE DO CAMPO DE CURSOS NO FORMULÁRIO =====
+document.addEventListener('DOMContentLoaded', function() {
+    const solicitacaoTipo = document.getElementById('solicitacao-tipo');
+    const cursoSelectGroup = document.getElementById('curso-select-group');
+    const cursoSelecionado = document.getElementById('curso-selecionado');
+
+    if (solicitacaoTipo && cursoSelectGroup && cursoSelecionado) {
+        solicitacaoTipo.addEventListener('change', function() {
+            if (this.value === 'cursos') {
+                cursoSelectGroup.style.display = 'block';
+                cursoSelecionado.setAttribute('required', 'required');
+                // Força reflow para garantir que a animação funcione
+                cursoSelectGroup.offsetHeight;
+                // Animação suave ao aparecer
+                setTimeout(() => {
+                    cursoSelectGroup.style.opacity = '1';
+                    cursoSelectGroup.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                cursoSelectGroup.style.opacity = '0';
+                cursoSelectGroup.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                    cursoSelectGroup.style.display = 'none';
+                    cursoSelecionado.removeAttribute('required');
+                    cursoSelecionado.value = ''; // Limpa a seleção
+                }, 300);
+            }
+        });
+    }
+});
+
 // ===== FORMULÁRIOS =====
 const consultoriaForm = document.getElementById('consultoriaForm');
-const filieForm = document.getElementById('filie-form');
+const filieForm = document.getElementById('contato-form');
 
 // Animação de foco nos inputs
 document.querySelectorAll('input, textarea, select').forEach(input => {

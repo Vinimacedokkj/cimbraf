@@ -894,7 +894,7 @@ section {
 
 .director-photo {
     width: 100%;
-    height: 500px;
+    height: 350px;
     background: linear-gradient(135deg, var(--verde-institucional), var(--dourado));
     display: flex;
     align-items: center;
@@ -908,7 +908,7 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
 }
 
 .director-photo::before {
@@ -1325,6 +1325,15 @@ section {
     min-height: 120px;
 }
 
+/* Animação para campo de cursos dinâmico */
+#curso-select-group {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
 .submit-btn {
     width: 100%;
     padding: 1rem;
@@ -1368,6 +1377,10 @@ section {
     transform: translateY(-1px) scale(0.98);
 }
 
+.submit-btn i {
+    margin-right: 0.5rem;
+}
+
 /* ===== SEÇÃO: QUALIFICAÇÃO E CURSOS ===== */
 #qualificacao {
     background: var(--bege-claro);
@@ -1375,20 +1388,25 @@ section {
 
 .courses-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
     margin-top: 2rem;
+    align-items: start;
 }
 
 .course-card {
     background: var(--branco);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-top: 4px solid var(--dourado);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
 }
 
 .course-card::before {
@@ -1415,21 +1433,22 @@ section {
 }
 
 .course-card i {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: var(--dourado);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .course-card h3 {
     color: var(--verde-institucional);
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.25rem;
+    line-height: 1.3;
 }
 
 .course-info {
     display: flex;
-    gap: 1.5rem;
-    margin: 1rem 0;
+    gap: 1.2rem;
+    margin: 0.8rem 0;
     color: var(--cinza-neutro);
     font-size: 0.9rem;
 }
@@ -1442,19 +1461,51 @@ section {
 
 .course-card p {
     color: #666;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.course-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 1.2rem;
+}
+
+.course-details h4 {
+    color: var(--verde-institucional);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.course-details ul,
+.course-details ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.course-details ul li,
+.course-details ol li {
+    margin-bottom: 0.4rem;
 }
 
 .course-btn {
     display: inline-block;
-    padding: 0.8rem 2rem;
+    padding: 0.7rem 1.8rem;
     background: var(--laranja-vibrante);
     color: var(--branco);
     text-decoration: none;
     border-radius: 25px;
     font-weight: 600;
     transition: all 0.3s ease;
+    width: auto;
+    font-size: 0.95rem;
+    margin-top: auto;
 }
 
 .course-btn:hover {
@@ -1482,6 +1533,8 @@ section {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    line-height: 1.7;
+    display: block;
 }
 
 .opportunity-item::before {
@@ -1512,7 +1565,7 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: start;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -1520,6 +1573,8 @@ section {
 .opportunity-header h3 {
     color: var(--verde-institucional);
     font-size: 1.3rem;
+    line-height: 1.4;
+    margin-bottom: 0;
 }
 
 .opportunity-badge {
@@ -1534,20 +1589,82 @@ section {
 .opportunity-meta {
     display: flex;
     gap: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
     color: var(--cinza-neutro);
     font-size: 0.9rem;
+    flex-wrap: wrap;
 }
 
 .opportunity-meta span {
     display: flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.4rem;
 }
 
 .opportunity-item p {
-    color: #666;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.opportunity-item p strong {
+    color: var(--verde-institucional);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+.opportunity-item p:first-of-type strong {
+    margin-top: 0;
+}
+
+.opportunity-item ul,
+.opportunity-item ol {
+    margin: 0.5rem 0 1.5rem 0;
+    padding-left: 1.8rem;
+    color: #555;
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+.opportunity-item ul li,
+.opportunity-item ol li {
+    margin-bottom: 0.6rem;
+    padding-left: 0.5rem;
+    position: relative;
     line-height: 1.7;
+}
+
+.opportunity-item ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.opportunity-item ul li {
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.opportunity-item ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--laranja-vibrante);
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.opportunity-item ol {
+    list-style-type: decimal;
+    padding-left: 1.8rem;
+}
+
+.opportunity-item ol li::marker {
+    color: var(--laranja-vibrante);
+    font-weight: bold;
 }
 
 .filters {
@@ -1681,30 +1798,30 @@ section {
 }
 
 /* ===== SEÇÃO: FILIE-SE (FOOTER/CTA FINAL) ===== */
-#filie-se {
+#contato {
     background: linear-gradient(135deg, var(--verde-institucional) 0%, var(--dourado) 100%);
     color: var(--branco);
     padding: 5rem 2rem;
 }
 
-#filie-se .section-title h2 {
+#contato .section-title h2 {
     color: var(--branco);
     font-size: clamp(2rem, 4vw, 3.5rem);
 }
 
-.filie-content {
+.contato-content {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
 }
 
-.filie-content p {
+.contato-content p {
     font-size: 1.2rem;
     margin-bottom: 3rem;
     line-height: 1.8;
 }
 
-.filie-form {
+.contato-form {
     background: rgba(255,255,255,0.95);
     padding: 3rem;
     border-radius: 20px;
@@ -1712,11 +1829,11 @@ section {
     margin-top: 2rem;
 }
 
-.filie-form .form-group label {
+.contato-form .form-group label {
     color: var(--verde-institucional);
 }
 
-.filie-cta {
+.contato-cta {
     display: inline-block;
     padding: 1.2rem 3rem;
     background: var(--laranja-vibrante);
@@ -1730,7 +1847,7 @@ section {
     margin-top: 2rem;
 }
 
-.filie-cta:hover {
+.contato-cta:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 30px rgba(200, 118, 32, 0.6);
     background: #D6892A;
