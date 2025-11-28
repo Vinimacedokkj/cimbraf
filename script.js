@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== FORMULÁRIOS =====
 const consultoriaForm = document.getElementById('consultoriaForm');
-const filieForm = document.getElementById('contato-form');
+const contatoForm = document.getElementById('contato-form');
 
 // Animação de foco nos inputs
 document.querySelectorAll('input, textarea, select').forEach(input => {
@@ -293,53 +293,70 @@ document.querySelectorAll('input, textarea, select').forEach(input => {
     });
 });
 
-consultoriaForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const submitBtn = consultoriaForm.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    
-    submitBtn.textContent = 'Enviando...';
-    submitBtn.style.opacity = '0.7';
-    submitBtn.disabled = true;
-    
-    setTimeout(() => {
-        submitBtn.textContent = '✓ Enviado!';
-        submitBtn.style.background = '#28a745';
-        alert('Obrigado pelo seu interesse! Entraremos em contato em breve.');
+// Handler para formulário de contato (Netlify)
+if (contatoForm) {
+    contatoForm.addEventListener('submit', function(e) {
+        const submitBtn = contatoForm.querySelector('.submit-btn');
+        const originalText = submitBtn.innerHTML;
         
-        setTimeout(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.style.background = '';
-            submitBtn.style.opacity = '1';
-            submitBtn.disabled = false;
-            consultoriaForm.reset();
-        }, 2000);
-    }, 1000);
-});
+        // Feedback visual durante o envio
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        submitBtn.style.cursor = 'not-allowed';
+        
+        // Verifica se estamos em desenvolvimento local
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            // Em desenvolvimento local, previne o envio (Netlify Forms só funciona no Netlify)
+            e.preventDefault();
+            setTimeout(function() {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Enviado! (Teste no Netlify)';
+                submitBtn.style.background = '#28a745';
+                alert('⚠️ Netlify Forms só funciona após o deploy no Netlify.\n\nEm desenvolvimento local, o formulário não pode ser enviado.\n\nFaça o deploy no Netlify para testar o envio real.');
+                setTimeout(function() {
+                    contatoForm.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.style.opacity = '1';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }, 1500);
+        } else {
+            // No Netlify, deixa o formulário ser enviado normalmente
+            // O Netlify processará automaticamente
+            // Após o envio, pode redirecionar para success.html se configurado
+            setTimeout(function() {
+                window.location.href = '/success.html';
+            }, 2000);
+        }
+    });
+}
 
-filieForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const submitBtn = filieForm.querySelector('.submit-btn');
-    const originalText = submitBtn.textContent;
-    
-    submitBtn.textContent = 'Enviando...';
-    submitBtn.style.opacity = '0.7';
-    submitBtn.disabled = true;
-    
-    setTimeout(() => {
-        submitBtn.textContent = '✓ Enviado!';
-        submitBtn.style.background = '#28a745';
-        alert('Sua solicitação de filiação foi enviada com sucesso! Entraremos em contato em breve.');
+if (consultoriaForm) {
+    consultoriaForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = consultoriaForm.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        
+        submitBtn.textContent = 'Enviando...';
+        submitBtn.style.opacity = '0.7';
+        submitBtn.disabled = true;
         
         setTimeout(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.style.background = '';
-            submitBtn.style.opacity = '1';
-            submitBtn.disabled = false;
-            filieForm.reset();
-        }, 2000);
-    }, 1000);
-});
+            submitBtn.textContent = '✓ Enviado!';
+            submitBtn.style.background = '#28a745';
+            alert('Obrigado pelo seu interesse! Entraremos em contato em breve.');
+            
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.style.background = '';
+                submitBtn.style.opacity = '1';
+                submitBtn.disabled = false;
+                consultoriaForm.reset();
+            }, 2000);
+        }, 1000);
+    });
+}
 
 
 // ===== PERFORMANCE: LAZY LOADING =====
