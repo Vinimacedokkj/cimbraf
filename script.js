@@ -24,22 +24,12 @@ if (languageBtn && languageDropdown) {
         }
     });
     
-    // Fechar dropdown ao selecionar um idioma (mesmo que não seja funcional)
+    // Navegar para a página do idioma selecionado
     languageOptions.forEach(option => {
         option.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Remove active de todos
-            languageOptions.forEach(opt => opt.classList.remove('active'));
-            // Adiciona active no selecionado
-            option.classList.add('active');
-            // Atualiza o texto do botão
-            const langText = option.textContent.trim();
-            const langCode = option.getAttribute('data-lang').toUpperCase();
-            const languageText = languageBtn.querySelector('.language-text');
-            if (languageText) {
-                languageText.textContent = langCode;
-            }
-            // Fecha o dropdown
+            // Não previne o comportamento padrão - permite navegação
+            // O link já tem o href correto, então a navegação acontecerá naturalmente
+            // Fecha o dropdown antes de navegar
             languageSelector.classList.remove('active');
         });
     });
@@ -320,7 +310,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===== FORMULÁRIOS =====
-const consultoriaForm = document.getElementById('consultoriaForm');
 const contatoForm = document.getElementById('contato-form');
 
 // Animação de foco nos inputs
@@ -367,32 +356,6 @@ if (contatoForm) {
         // No Netlify, deixa o formulário ser enviado normalmente
         // O Netlify processará automaticamente e redirecionará para /success.html
         // conforme configurado no atributo action do formulário
-    });
-}
-
-if (consultoriaForm) {
-    consultoriaForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const submitBtn = consultoriaForm.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        
-        submitBtn.textContent = 'Enviando...';
-        submitBtn.style.opacity = '0.7';
-        submitBtn.disabled = true;
-        
-        setTimeout(() => {
-            submitBtn.textContent = '✓ Enviado!';
-            submitBtn.style.background = '#28a745';
-            alert('Obrigado pelo seu interesse! Entraremos em contato em breve.');
-            
-            setTimeout(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.style.background = '';
-                submitBtn.style.opacity = '1';
-                submitBtn.disabled = false;
-                consultoriaForm.reset();
-            }, 2000);
-        }, 1000);
     });
 }
 
