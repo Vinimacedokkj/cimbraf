@@ -1258,6 +1258,224 @@ section {
     margin-top: 2rem;
 }
 
+/* ===== PROJETOS EM BREVE ===== */
+.projects-coming-soon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.coming-soon-card {
+    background: linear-gradient(135deg, var(--branco) 0%, rgba(247, 245, 238, 0.8) 100%);
+    border-radius: 25px;
+    padding: 4rem 3rem;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.coming-soon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 25px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--verde-institucional), var(--dourado), var(--laranja-vibrante));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.coming-soon-card:hover::before {
+    opacity: 1;
+}
+
+.coming-soon-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.coming-soon-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.icon-circle {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--verde-institucional), var(--dourado));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(16, 62, 40, 0.3);
+    animation: float 3s ease-in-out infinite;
+}
+
+.icon-circle i {
+    font-size: 3.5rem;
+    color: var(--branco);
+    animation: rocketPulse 2s ease-in-out infinite;
+}
+
+@keyframes rocketPulse {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.05);
+    }
+}
+
+.pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border: 3px solid var(--laranja-vibrante);
+    border-radius: 50%;
+    opacity: 0;
+    animation: pulseRing 2s ease-out infinite;
+}
+
+.pulse-ring.delay-1 {
+    animation-delay: 0.7s;
+}
+
+.pulse-ring.delay-2 {
+    animation-delay: 1.4s;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 0;
+    }
+}
+
+.coming-soon-card h3 {
+    color: var(--verde-institucional);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.coming-soon-text {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.coming-soon-subtitle {
+    color: var(--laranja-vibrante);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.coming-soon-subtitle i {
+    animation: bellRing 2s ease-in-out infinite;
+}
+
+@keyframes bellRing {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    10%, 30% {
+        transform: rotate(-15deg);
+    }
+    20%, 40% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+}
+
+.coming-soon-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.coming-soon-badges .badge {
+    background: linear-gradient(135deg, rgba(16, 62, 40, 0.1), rgba(160, 106, 26, 0.1));
+    color: var(--verde-institucional);
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.coming-soon-badges .badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(200, 118, 32, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.coming-soon-badges .badge:hover::before {
+    left: 100%;
+}
+
+.coming-soon-badges .badge:hover {
+    background: linear-gradient(135deg, var(--verde-institucional), var(--dourado));
+    color: var(--branco);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(16, 62, 40, 0.3);
+    border-color: var(--laranja-vibrante);
+}
+
+.coming-soon-badges .badge i {
+    font-size: 1rem;
+}
+
+/* ===== ESTILOS ANTIGOS (MANTIDOS PARA COMPATIBILIDADE) ===== */
 .project-card {
     background: var(--branco);
     border-radius: 15px;
@@ -1435,6 +1653,68 @@ section {
     line-height: 1.7;
 }
 
+/* ===== BOTÃO DE SOLICITAÇÃO DE CONSULTORIA ===== */
+.consultoria-cta {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+}
+
+.consultoria-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 3rem;
+    background: linear-gradient(135deg, var(--laranja-vibrante), var(--dourado));
+    color: var(--branco);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(200, 118, 32, 0.4);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.consultoria-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.consultoria-btn:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.consultoria-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(200, 118, 32, 0.6);
+    background: linear-gradient(135deg, #D6892A, #B85F15);
+}
+
+.consultoria-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.consultoria-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.consultoria-btn:hover i {
+    transform: rotate(15deg) scale(1.1);
+}
+
 .consultoria-form {
     max-width: 600px;
     margin: 3rem auto 0;
@@ -1471,6 +1751,10 @@ section {
     box-sizing: border-box;
     -webkit-appearance: none;
     appearance: none;
+}
+
+/* Seta apenas para campos select */
+.form-group select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.9rem center;
@@ -2381,6 +2665,56 @@ section {
         min-width: 40px;
         min-height: 40px;
     }
+    
+    /* ===== BOTÃO DE CONSULTORIA - MOBILE ===== */
+    .consultoria-cta {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+    
+    .consultoria-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 350px;
+        justify-content: center;
+    }
+    
+    /* ===== PROJETOS EM BREVE - MOBILE ===== */
+    .coming-soon-card {
+        padding: 2.5rem 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .icon-circle {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .icon-circle i {
+        font-size: 3rem;
+    }
+    
+    .coming-soon-card h3 {
+        font-size: 1.6rem;
+    }
+    
+    .coming-soon-text {
+        font-size: 1rem;
+    }
+    
+    .coming-soon-subtitle {
+        font-size: 1rem;
+    }
+    
+    .coming-soon-badges {
+        gap: 0.7rem;
+    }
+    
+    .coming-soon-badges .badge {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
 }
 
 /* ===== AJUSTES ADICIONAIS PARA TELAS PEQUENAS NO MENU MOBILE ===== */
@@ -2393,6 +2727,46 @@ section {
     .nav-menu a {
         font-size: 0.9rem;
         padding: 0.8rem 0;
+    }
+    
+    /* ===== BOTÃO DE CONSULTORIA - TELAS PEQUENAS ===== */
+    .consultoria-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 0.95rem;
+        max-width: 100%;
+    }
+    
+    /* ===== PROJETOS EM BREVE - TELAS PEQUENAS ===== */
+    .coming-soon-card {
+        padding: 2rem 1.2rem;
+    }
+    
+    .icon-circle {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .icon-circle i {
+        font-size: 2.5rem;
+    }
+    
+    .coming-soon-card h3 {
+        font-size: 1.4rem;
+    }
+    
+    .coming-soon-text {
+        font-size: 0.95rem;
+    }
+    
+    .coming-soon-badges {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .coming-soon-badges .badge {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
     }
 }
 
