@@ -4,6 +4,37 @@ const navLinks = document.querySelectorAll('.nav-link');
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const navMenu = document.getElementById('navMenu');
 
+// ===== SELETOR DE IDIOMA =====
+const languageSelector = document.getElementById('languageSelector');
+const languageBtn = document.getElementById('languageBtn');
+const languageDropdown = document.getElementById('languageDropdown');
+const languageOptions = document.querySelectorAll('.language-option');
+
+// Toggle do dropdown de idioma
+if (languageBtn && languageDropdown) {
+    languageBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        languageSelector.classList.toggle('active');
+    });
+    
+    // Fechar dropdown ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (!languageSelector.contains(e.target)) {
+            languageSelector.classList.remove('active');
+        }
+    });
+    
+    // Navegar para a página do idioma selecionado
+    languageOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            // Não previne o comportamento padrão - permite navegação
+            // O link já tem o href correto, então a navegação acontecerá naturalmente
+            // Fecha o dropdown antes de navegar
+            languageSelector.classList.remove('active');
+        });
+    });
+}
+
 // Header scroll effect
 window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
@@ -37,7 +68,8 @@ navLinks.forEach(link => {
 document.addEventListener('click', (e) => {
     if (navMenu.classList.contains('active') && 
         !navMenu.contains(e.target) && 
-        !mobileMenuBtn.contains(e.target)) {
+        !mobileMenuBtn.contains(e.target) &&
+        !languageSelector.contains(e.target)) {
         navMenu.classList.remove('active');
         document.body.classList.remove('menu-open');
         const icon = mobileMenuBtn.querySelector('i');
@@ -278,7 +310,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ===== FORMULÁRIOS =====
-const consultoriaForm = document.getElementById('consultoriaForm');
 const contatoForm = document.getElementById('contato-form');
 
 // Animação de foco nos inputs
@@ -325,32 +356,6 @@ if (contatoForm) {
         // No Netlify, deixa o formulário ser enviado normalmente
         // O Netlify processará automaticamente e redirecionará para /success.html
         // conforme configurado no atributo action do formulário
-    });
-}
-
-if (consultoriaForm) {
-    consultoriaForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const submitBtn = consultoriaForm.querySelector('.submit-btn');
-        const originalText = submitBtn.textContent;
-        
-        submitBtn.textContent = 'Enviando...';
-        submitBtn.style.opacity = '0.7';
-        submitBtn.disabled = true;
-        
-        setTimeout(() => {
-            submitBtn.textContent = '✓ Enviado!';
-            submitBtn.style.background = '#28a745';
-            alert('Obrigado pelo seu interesse! Entraremos em contato em breve.');
-            
-            setTimeout(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.style.background = '';
-                submitBtn.style.opacity = '1';
-                submitBtn.disabled = false;
-                consultoriaForm.reset();
-            }, 2000);
-        }, 1000);
     });
 }
 
