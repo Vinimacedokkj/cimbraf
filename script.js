@@ -24,15 +24,8 @@ if (languageBtn && languageDropdown) {
         }
     });
     
-    // Navegar para a página do idioma selecionado
-    languageOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
-            // Não previne o comportamento padrão - permite navegação
-            // O link já tem o href correto, então a navegação acontecerá naturalmente
-            // Fecha o dropdown antes de navegar
-            languageSelector.classList.remove('active');
-        });
-    });
+    // Language switching is now handled by i18n.js
+    // The event listeners are set up in i18n.js
 }
 
 // Header scroll effect
