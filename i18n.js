@@ -176,8 +176,7 @@ let i18n;
 document.addEventListener('DOMContentLoaded', () => {
     i18n = new I18n();
     i18n.init();
+    // Make i18n available globally after initialization
+    window.i18n = i18n;
 });
-
-// Make i18n available globally
-window.i18n = i18n;
 
