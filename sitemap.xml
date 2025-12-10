@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Página Inicial (PT-BR) -->
+    <url>
+        <loc>https://www.cimbraf.org/</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.cimbraf.org/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cimbraf.org/english.html"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.cimbraf.org/french.html"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://www.cimbraf.org/spanish.html"/>
+    </url>
+    
+    <!-- Página Inicial (English) -->
+    <url>
+        <loc>https://www.cimbraf.org/english.html</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.cimbraf.org/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cimbraf.org/english.html"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.cimbraf.org/french.html"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://www.cimbraf.org/spanish.html"/>
+    </url>
+    
+    <!-- Página Inicial (Français) -->
+    <url>
+        <loc>https://www.cimbraf.org/french.html</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.cimbraf.org/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cimbraf.org/english.html"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.cimbraf.org/french.html"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://www.cimbraf.org/spanish.html"/>
+    </url>
+    
+    <!-- Página Inicial (Español) -->
+    <url>
+        <loc>https://www.cimbraf.org/spanish.html</loc>
+        <lastmod>2025-01-27</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://www.cimbraf.org/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.cimbraf.org/english.html"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.cimbraf.org/french.html"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://www.cimbraf.org/spanish.html"/>
+    </url>
+    
+    <!-- Página de Sucesso (não indexar) -->
+    <!-- success.html não deve aparecer no sitemap se for apenas página de confirmação -->
+    
+</urlset>
+

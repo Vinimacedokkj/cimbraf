@@ -1,0 +1,23 @@
+# robots.txt para CIMBRAF
+# https://www.cimbraf.org/robots.txt
+
+User-agent: *
+Allow: /
+
+# Bloquear páginas administrativas ou de teste (se houver)
+Disallow: /admin/
+Disallow: /test/
+Disallow: /temp/
+
+# Permitir acesso a recursos importantes
+Allow: /assets/
+Allow: /style.css
+Allow: /script.js
+Allow: /var.css
+
+# Sitemap
+Sitemap: https://www.cimbraf.org/sitemap.xml
+
+# Crawl-delay (opcional, ajuste conforme necessário)
+# Crawl-delay: 1
+
