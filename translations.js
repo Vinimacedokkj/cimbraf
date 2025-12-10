@@ -288,7 +288,7 @@ const translations = {
         lang_pt: "🇧🇷 Português",
         lang_en: "🇺🇸 English",
         lang_es: "🇪🇸 Español",
-        lang_fr: "🇫🇷 Français",
+        // lang_fr: "🇫🇷 Français",
         
         // Mobile Menu
         mobile_menu: "Menu mobile"
@@ -876,7 +876,7 @@ const translations = {
         lang_pt: "🇧🇷 Português",
         lang_en: "🇺🇸 English",
         lang_es: "🇪🇸 Español",
-        lang_fr: "🇫🇷 Français",
+        // lang_fr: "🇫🇷 Français",
         
         // Mobile Menu
         mobile_menu: "Menú móvil"
